@@ -3,11 +3,142 @@
     <head>
         <title> Ideal React Seed </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="./static/styles/fontawesome-all.min.css" />
-        <link href="./static/styles/bulma.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="./static/styles/fontawesome-all.min.css">
+        <link href="./static/styles/bulma.min.css" rel="stylesheet">
+        <script type="text/javascript" src="./static/js/Chart.bundle.min.js"></script>
     </head>
-    <body>
-        <div id="app"></div>
+    <style>
+        .something_container { display: none }
+    </style>
+    
+    <body style="float: left;">
+        <div id="app" style="float: left;">
+            
+            <header style="background-image: url('static/images/coin.jpg'); height: 70px; float: left; width: 100%">
+                <p style="display: inline-block; height: 100%; color: white; vertical-align: middle;">a</p>
+                <p style="display: inline-block; vertical-align: middle; padding: 0 10px; cursor: pointer;" id="single">Single Conversion</p>
+                <p style="display: inline-block; vertical-align: middle; padding: 0 10px; cursor: pointer;" id="double">Double Conversion</p>
+                <p style="display: inline-block; vertical-align: middle; padding: 0 10px; cursor: pointer;" id="history">History</p>
+            </header>
+            <div id="center-body" style="float: left; width: 100%">
+                
+                <p>Date:</p>
+                <input name="dateStart" id="dateStart" type="date" />
+
+                <div id="single_container" class="something_container">
+                    <div>
+                        <p>From:</p>
+                        <select id="currency_from">
+
+                        </select>
+                    </div>
+                    <div>
+                        <input name="currency_from_input" id="currency_from_input" type="number" />
+                        <input name="exchange_rate" id="exchange_rate" placeholder="Exchange Rate" />
+                    </div>
+                    <div>
+                        <p>To:</p>
+                        <select id="currency_to">
+
+                        </select>
+                    </div>
+
+                    <p style="width:200px; background-color: grey; border-radius: 5px; height: 20px;" id="conversion_one_result"></p>
+
+                    <button className="button is-success is-primary is-large is-loading" id="single_conversion">Convert</button>
+                </div>
+
+                <div id="double_container" class="something_container">
+                    <div>
+                        <p>From:</p>
+                        <select id="double_currency_from">
+
+                        </select>
+                    </div>
+                    <div>
+                        <input name="double_currency_from_input" id="double_currency_from_input" type="number" />
+                    </div>
+                    <div>
+                        <p>To:</p>
+                        <select id="double_currency_to_one">
+
+                        </select>
+                        <input name="double_exchange_rate_one" id="double_exchange_rate_one" placeholder="Exchange Rate" />
+                        <p style="width:200px; background-color: grey; border-radius: 5px; height: 20px;" id="double_conversion_one_result"></p>
+                    </div>
+
+                    <div>
+                        <p>To:</p>
+                        <select id="double_currency_to_two">
+
+                        </select>
+                        <input name="double_exchange_rate_two" id="double_exchange_rate_two" placeholder="Exchange Rate" />
+                        <p style="width:200px; background-color: grey; border-radius: 5px; height: 20px;" id="double_conversion_two_result"></p>
+                    </div>
+
+                    <button className="button is-success is-primary is-large is-loading" id="double_conversion">Convert</button>
+                </div>
+
+                <div id="history_container" class="something_container">
+
+                    <p>Date End:</p>
+                    <input name="dateEnd" id="dateEnd" type="date" />
+
+                    <div>
+                        <p>History:</p>
+                    </div>
+
+                    <div>
+                        <p>From One:</p>
+                        <select id="history_currency_from_one">
+
+                        </select>
+                    </div>
+                    <div>
+                        <p>From Two:</p>
+                        <select id="history_currency_from_two">
+
+                        </select>
+                    </div>
+                    <div>
+                        <p>To One:</p>
+                        <select id="history_currency_to_one">
+
+                        </select>
+                    </div>
+
+                    <div>
+                        <p>To Two:</p>
+                        <select id="history_currency_to_two">
+
+                        </select>
+                    </div>
+
+                    <button className="button is-success is-primary is-large is-loading" id="history_graph">Graph</button>
+                    
+                    <canvas id="canvas_one" width="2136" height="1068" class="chartjs-render-monitor" style="display: block; height: 534px; width: 1068px;"></canvas>
+                    <canvas id="canvas_two" width="2136" height="1068" class="chartjs-render-monitor" style="display: block; height: 534px; width: 1068px;"></canvas>
+                </div>
+
+
+            </div>
+            <footer style="width: 100%; height: 70px; clear: both;">
+                <img src="static/images/coin.jpg" alt="footer" style="height:5px; width: 100%; float: left;"/>
+
+                <div class="columns" style="width: 100%">
+                    <div class="column">
+                        <a href="https://vincenthokie.github.io">Resume</a>
+                    </div>
+                    <div class="column">
+                        © 2018
+                    </div>
+                    <div class="column">
+                        ALC Currency Converter
+                    </div>
+                </div>
+                
+            </footer>
+        </div>
         <script type="text/javascript" src="./build/main.bundle.js"></script>
     </body>
 </html>
