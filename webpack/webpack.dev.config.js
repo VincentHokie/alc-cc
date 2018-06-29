@@ -27,9 +27,10 @@ module.exports = {
   output: {
     path: path.join(parentDir, 'build'),
     filename: 'main.bundle.js',
+    publicPath: parentDir
   },
   devServer: {
     contentBase: parentDir,
-    historyApiFallback: true,
-  },
+    historyApiFallback: true
+  }
 };
