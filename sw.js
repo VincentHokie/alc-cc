@@ -4,11 +4,11 @@
 */
 
 
-const SW_VERSION = 'v1';
+const SW_VERSION = "v1";
 
   self.addEventListener('install', (event) => {
     event.waitUntil(
-      caches.open(SW_VERSION).then((cache) => {
+      caches.open(SW_VERSION.toString()).then((cache) => {
         return cache.addAll([
           '/',
           '/index.html',
@@ -16,6 +16,8 @@ const SW_VERSION = 'v1';
           '/static/images/coin.jpg',
           '/static/js/Chart.bundle.min',
         ]);
+      }).catch((error) => {
+        console.log("error", error)
       })
     );
   });
@@ -27,7 +29,7 @@ const SW_VERSION = 'v1';
       caches.match(event.request).then((resp) => {
         return resp || fetch(event.request).then((response) => {
           let responseClone = response.clone();
-          caches.open(SW_VERSION).then((cache) => {
+          caches.open(SW_VERSION.toString()).then((cache) => {
             cache.put(event.request, responseClone);
           });
   
