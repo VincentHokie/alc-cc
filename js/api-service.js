@@ -1,6 +1,12 @@
-import { request, populateCountries, getCountries_indexdb } from "./indexdb";
-import { populateDropdown, generateCurrencyDropDownHTMLOutput, generateCurrencyDropDownHTMLOutputFromArray } from "./dom-manipulation";
+import { request, populateCountries, getCountries_indexdb, populateConversions, getConversions_indexdb, getDoubleConversions_indexdb } from "./indexdb";
+import {
+    populateDropdown,
+    generateCurrencyDropDownHTMLOutput,
+    generateCurrencyDropDownHTMLOutputFromArray,
+    populateSingleConversionHTML,
+    populateDoubleConversionHTML } from "./dom-manipulation";
 import { plotGraphOne, plotGraphTwo } from "./chartjs-plot";
+import * as theDom from "./dom-elements";
 
 const axios = require('axios');
 const baseUrl = 'https://free.currencyconverterapi.com/api/v5/';
@@ -21,55 +27,35 @@ export const getCountries = () => {
 
 export const makeSingleConversion = (converison_one) => {
 
-    let currencyFromInput = document.getElementById("currency_from_input");
-    let initalCurrency = currencyFromInput.value;
+    let initalCurrency = theDom.singleCurrencyFromInput.value;
 
-    let converison_one_result = document.getElementById("conversion_one_result");
-    let exchangeRate = document.getElementById("exchange_rate");
-    let dateStart = document.getElementById("dateStart");
-
-    axios.get(`${baseUrl}convert?q=${converison_one}&compact=ultra&date=${dateStart.value}`)
+    axios.get(`${baseUrl}convert?q=${converison_one}&compact=ultra&date=${theDom.dateStart.value}`)
     .then((response) => {
-        converison_one_result.innerHTML = initalCurrency*response.data[converison_one][dateStart.value];
-        exchangeRate.value = response.data[converison_one][dateStart.value];
+        populateSingleConversionHTML(response.data, initalCurrency, converison_one);
+        populateConversions(request, converison_one, response.data[converison_one]);
     })
     .catch((error) => {
-        console.log(error);
-        converison_one_result.innerHTML = initalCurrency*response.data[converison_one][dateStart.value];
+        getConversions_indexdb(request, converison_one, initalCurrency);
     });
 }
 
-export const makeDoubleConversion = (converison_one, converison_two) => {
+export const makeDoubleConversion = (converison_one, conversion_two) => {
 
     let converison_two_url;
-    if (converison_two)
-        converison_two_url = `,${converison_two}`
+    if (conversion_two)
+        converison_two_url = `,${conversion_two}`
 
-    let currencyFromInput = document.getElementById("double_currency_from_input");
-    let initalCurrency = currencyFromInput.value;
+    let initialCurrency = theDom.doubleCurrencyFromInput.value;
 
-    let converison_one_result = document.getElementById("double_conversion_one_result");
-    let converison_two_result = document.getElementById("double_conversion_two_result");
-    let dateStart = document.getElementById("dateStart");
-
-    let exchangeRateOne = document.getElementById("double_exchange_rate_one");
-    let exchangeRateTwo = document.getElementById("double_exchange_rate_two");
-
-    axios.get(`${baseUrl}convert?q=${converison_one}${converison_two ? converison_two_url : "" }&compact=ultra&date=${dateStart.value}`)
+    axios.get(`${baseUrl}convert?q=${converison_one}${conversion_two ? converison_two_url : "" }&compact=ultra&date=${theDom.dateStart.value}`)
     .then((response) => {
+        populateDoubleConversionHTML(response.data, initialCurrency, converison_one, conversion_two);
+        populateConversions(request, converison_one, response.data[converison_one]);
+        populateConversions(request, conversion_two, response.data[conversion_two]);
 
-        converison_one_result.innerHTML = initalCurrency*response.data[converison_one][dateStart.value];
-        converison_two_result.innerHTML = initalCurrency*response.data[converison_two][dateStart.value];
-
-        exchangeRateOne.value = response.data[converison_one][dateStart.value];
-        exchangeRateTwo.value = response.data[converison_two][dateStart.value];
     })
     .catch((error) => {
-        converison_one_result.innerHTML = initalCurrency*response.data[converison_one][dateStart.value];
-        converison_two_result.innerHTML = initalCurrency*response.data[converison_two][dateStart.value];
-
-        exchangeRateOne.value = response.data[converison_one][dateStart.value];
-        exchangeRateTwo.value = response.data[converison_one][dateStart.value];
+        getDoubleConversions_indexdb(request, converison_one, conversion_two, initialCurrency);
     });
 }
 
@@ -96,10 +82,7 @@ export const getHistoricalData = (converison_one, converison_two) => {
     if (converison_two)
         converison_two_url = `,${converison_two}`
 
-    let dateStart = document.getElementById("dateStart");
-    let dateEnd = document.getElementById("dateEnd");
-
-    axios.get(`${baseUrl}convert?q=${converison_one}${converison_two ? converison_two_url : "" }&compact=ultra&date=${dateStart.value}&endDate=${dateEnd.value}`)
+    axios.get(`${baseUrl}convert?q=${converison_one}${converison_two ? converison_two_url : "" }&compact=ultra&date=${theDom.dateStart.value}&endDate=${theDom.dateEnd.value}`)
     .then((response) => {
         let graphHelperReturn = graphHelper(response.data, converison_one, converison_two);
         plotGraphOne(graphHelperReturn[0], graphHelperReturn[1], graphHelperReturn[3]);

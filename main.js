@@ -1,5 +1,5 @@
 import { screenSetup } from "./js/screen-setup";
-import { getCountries, makeSingleConversion, makeDoubleConversion, getHistoricalData } from "./js/api-service";
+import { makeSingleConversion, makeDoubleConversion, getHistoricalData } from "./js/api-service";
 import { request, indexDBSetup } from "./js/indexdb";
 import * as theDom from "./js/dom-elements";
 
@@ -34,21 +34,19 @@ theDom.historyMenu.addEventListener("click", () => {
 
 
 
-// if ('serviceWorker' in navigator) {
-//     navigator.serviceWorker.register('/js/sw.js')
-//     .then((reg) => {
-//         // registration worked
-//         console.log('Registration succeeded. Scope is ' + reg.scope);
-//     }).catch((error) => {
-//         // registration failed
-//         console.log('Registration failed with ' + error);
-//     });
-// }
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/js/sw.js')
+    .then((reg) => {
+        // registration worked
+        console.log('Registration succeeded. Scope is ' + reg.scope);
+    }).catch((error) => {
+        // registration failed
+        console.log('Registration failed with ' + error);
+    });
+}
 
 screenSetup();
 indexDBSetup(request);
-
-getCountries();
 
 /*
     Handle the api interactions on button clicks
