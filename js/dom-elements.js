@@ -24,3 +24,14 @@ export const historyContainer = document.getElementById("history_container");
 export const spaContainers = document.getElementsByClassName("something_container");
 
 export const dateStart = document.getElementById("dateStart");
+export const dateEnd = document.getElementById("dateEnd");
+
+export const singleCurrencyFromInput = document.getElementById("currency_from_input");
+export const singleConverisonOneResult = document.getElementById("conversion_one_result");
+export const singleExchangeRate = document.getElementById("exchange_rate");
+
+export const doubleCurrencyFromInput = document.getElementById("double_currency_from_input");
+export const doubleConverisonOneResult = document.getElementById("double_conversion_one_result");
+export const doubleConverisonTwoResult = document.getElementById("double_conversion_two_result");
+export const doubleExchangeRateOne = document.getElementById("double_exchange_rate_one");
+export const doubleExchangeRateTwo = document.getElementById("double_exchange_rate_two");

@@ -1,0 +1,15 @@
+select {
+    font-size: 15px;
+    height: 35px;
+    color: #0077FF;
+    background-color: #fff;
+    border-color: #eee;
+}
+
+select.history {
+    display: inline;
+}
+
+select.from {
+    display: block
+}

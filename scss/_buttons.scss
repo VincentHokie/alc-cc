@@ -1,0 +1,26 @@
+button {
+    display:inline-block;
+    padding:10px 40px;;
+    border:0.1em solid #0077FF;
+    margin:10px 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#000;
+    text-align:center;
+    transition: all 0.2s;
+}
+
+button:hover {
+    color:#fff;
+    background-color:#0077FF;
+}
+
+@media all and (max-width:30em){
+    button {
+        display:block;
+        margin:0.4em auto;
+    }
+}
