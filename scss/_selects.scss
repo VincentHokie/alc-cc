@@ -11,5 +11,10 @@ select.history {
 }
 
 select.from {
-    display: block
+    display: block;
+    margin: 10px 0;
+}
+
+select.select_to {
+    margin-bottom: 10px;
 }

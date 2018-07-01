@@ -5,6 +5,8 @@ import * as theDom from "./js/dom-elements";
 
 // show the single converter first always
 theDom.singleContainer.style.display = "block";
+theDom.dateEndContainer.style.display = "none";
+theDom.singleMenu.classList.toggle("selected");
 theDom.dateStart.valueAsDate = new Date();
 
 /*
@@ -16,19 +18,33 @@ let hideAllContainers = () => {
         contain.style.display = "none";
 }
 
+let toggleSelectedMenu = (removed, added) => {
+    removed[0].classList.toggle("selected");
+    added.classList.toggle("selected");
+}
+
 theDom.singleMenu.addEventListener("click", () => {
     hideAllContainers();
     theDom.singleContainer.style.display = "block";
+    theDom.dateEndContainer.style.display = "none";
+
+    toggleSelectedMenu(document.getElementsByClassName("selected"), theDom.singleMenu);
 });
 
 theDom.doubleMenu.addEventListener("click", () => {
     hideAllContainers();
     theDom.doubleContainer.style.display = "block";
+    theDom.dateEndContainer.style.display = "none";
+
+    toggleSelectedMenu(document.getElementsByClassName("selected"), theDom.doubleMenu);
 });
 
 theDom.historyMenu.addEventListener("click", () => {
     hideAllContainers();
     theDom.historyContainer.style.display = "block";
+    theDom.dateEndContainer.style.display = "inline-block";
+
+    toggleSelectedMenu(document.getElementsByClassName("selected"), theDom.historyMenu);
 });
 
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> Ideal React Seed </title>
+        <title> ALC Currency Converter </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="./build/main.css" rel="stylesheet">
     </head>
@@ -9,26 +9,39 @@
         <div id="app">
             
             <header>
-                <p id="vertilizer">a</p>
                 <p id="single" class="menu_items">Single Conversion</p>
                 <p id="double" class="menu_items">Double Conversion</p>
                 <p id="history" class="menu_items">History</p>
             </header>
-            <div id="center-body" style="float: left; width: 100%">
-                    
-                <p>Date:</p>
-                <input name="dateStart" id="dateStart" type="date" />
+            <div id="center-body">
+                
+                <div id="dateContainerContainer">
+                    <div id="dateStartContainer" class="dateContainer">
+                        <label for="inp" class="inp">
+                            <input type="date" name="dateStart" id="dateStart" placeholder="&nbsp;">
+                            <span class="label">Date</span>
+                            <span class="border"></span>
+                        </label>
+                    </div>
+                    <div id="dateEndContainer" class="dateContainer">
+                        <label for="inp" class="inp">
+                            <input type="date" name="dateEnd" id="dateEnd" placeholder="&nbsp;">
+                            <span class="label">Date End</span>
+                            <span class="border"></span>
+                        </label>
+                    </div>
+                </div>
 
                 <div id="single_container" class="something_container">
-                    <div>
+                    <div class="single_container">
                         <label for="inp" class="inp">
-                            <input type="number" name="currency_from_input" id="currency_from_input" placeholder="&nbsp;">
+                            <input type="number" name="currency_from_input" min="1" id="currency_from_input" placeholder="&nbsp;">
                             <span class="label">From</span>
                             <span class="border"></span>
                         </label>
                         <select id="currency_from" class="from"></select>
                     </div>
-                    <div>
+                    <div class="single_container">
 
                         <label for="inp" class="inp">
                             <input type="text" id="exchange_rate" name="exchange_rate" class="exchange_rate" placeholder="&nbsp;" readonly>
@@ -37,28 +50,34 @@
                         </label>
 
                     </div>
-                    <div>
-                        <p>To:</p>
-                        <select id="currency_to"></select>
+                    <div class="single_container">
+                        <p class="to">To</p>
+                        <select id="currency_to" class="select_to"></select>
+                        <label for="inp" class="inp">
+                            <input type="text" name="double_exchange_rate_one" id="conversion_one_result" class="exchange_rate" placeholder="&nbsp;" readonly>
+                            <span class="label">Result</span>
+                            <span class="border"></span>
+                        </label>
                     </div>
 
-                    <p class="conversion_result" id="conversion_one_result"></p>
-
-                    <button id="single_conversion">Convert</button>
+                    <div class="button-container">
+                        <button id="single_conversion">Convert</button>
+                        <img src="static/images/img-loading.gif" alt="loading gif" style="float: left;" class="loading-gif" id="single_gif" />
+                    </div>
                 </div>
 
                 <div id="double_container" class="something_container">
-                    <div>
+                    <div class="double_component_container">
                         <label for="inp" class="inp">
-                            <input type="text" name="double_currency_from_input" type="number" id="double_currency_from_input" placeholder="&nbsp;">
+                            <input type="text" name="double_currency_from_input" type="number" min="1" id="double_currency_from_input" placeholder="&nbsp;">
                             <span class="label">From</span>
                             <span class="border"></span>
                         </label>
                         <select id="double_currency_from" class="from"></select>
                     </div>
-                    <div>
-                        <p>To:</p>
-                        <select id="double_currency_to_one">
+                    <div class="double_component_container">
+                        <p class="to">To</p>
+                        <select id="double_currency_to_one" class="select_to">
 
                         </select>
                         <label for="inp" class="inp">
@@ -66,44 +85,57 @@
                             <span class="label">Exchange Rate</span>
                             <span class="border"></span>
                         </label>
-                        <p id="double_conversion_one_result"></p>
+                        <label for="inp" class="inp">
+                            <input type="text" name="double_conversion_one_result" id="double_conversion_one_result" class="exchange_rate" placeholder="&nbsp;" readonly>
+                            <span class="label">Result</span>
+                            <span class="border"></span>
+                        </label>
                     </div>
 
-                    <div>
-                        <p>To:</p>
-                        <select id="double_currency_to_two"></select>
+                    <div class="double_component_container">
+                        <p class="to">To</p>
+                        <select id="double_currency_to_two" class="select_to"></select>
                         <label for="inp" class="inp">
                             <input type="text" name="double_exchange_rate_two" id="double_exchange_rate_two" class="exchange_rate" placeholder="&nbsp;" readonly>
                             <span class="label">Exchange Rate</span>
                             <span class="border"></span>
                         </label>
-                        <p id="double_conversion_two_result"></p>
+                        <label for="inp" class="inp">
+                            <input type="text" name="double_conversion_two_result" id="double_conversion_two_result" class="exchange_rate" placeholder="&nbsp;" readonly>
+                            <span class="label">Result</span>
+                            <span class="border"></span>
+                        </label>
                     </div>
 
-                    <button id="double_conversion">Convert</button>
+                    <div class="button-container">
+                        <button id="double_conversion">Convert</button>
+                        <img src="static/images/img-loading.gif" alt="loading gif" style="float: left;" class="loading-gif" id="double_gif" />
+                    </div>
+                    
                 </div>
 
                 <div id="history_container" class="something_container">
 
-                    <p>Date End:</p>
-                    <input name="dateEnd" id="dateEnd" type="date" />
-                    <p>Plot the history of:</p>
+                    <p class="hist_p">Plot the history of:</p>
                     <div>
                         <select id="history_currency_from_one" class="history"></select>
                         <p class="vs">Vs</p>
                         <select id="history_currency_to_one" class="history"></select>
                     </div>
-                    <p>and</p>
+                    <p class="hist_p">and</p>
                     <div>
                         <select id="history_currency_from_two" class="history"></select>
                         <p class="vs">Vs</p>
                         <select id="history_currency_to_two" class="history"></select>
                     </div>
 
-                    <button className="button is-success is-primary is-large is-loading" id="history_graph">Graph</button>
+                    <div class="button-container">
+                        <button id="history_graph">Graph</button>
+                        <img src="static/images/img-loading.gif" alt="loading gif" style="float: left;" class="loading-gif" id="history_gif" />
+                    </div>
                     
-                    <canvas id="canvas_one" width="2136" height="1068" class="chartjs-render-monitor"></canvas>
-                    <canvas id="canvas_two" width="2136" height="1068" class="chartjs-render-monitor"></canvas>
+                    <canvas id="canvas_one" class="chartjs-render-monitor"></canvas>
+                    <canvas id="canvas_two" class="chartjs-render-monitor"></canvas>
 
                     <p class="notice">*N.B This feature does not work offline, stay tuned though </p>
                 </div>
