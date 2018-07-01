@@ -1,5 +1,6 @@
 import * as theDom from "./dom-elements";
 
+// allow dd/mm/yyyy and yyyy/mm/dd date formats
 const dateRegex = /^(0[1-9]|1\d|2\d|3[01])\/(0[1-9]|1[0-2])\/(19|20)\d{2}$/ ;
 const dateRegexTwo = /^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|1\d|2\d|3[01])$/ ;
 
@@ -48,6 +49,7 @@ let dateHistoryValidation = (date) => {
 export const conversionDateValidation = (date) => {
     let validDate = dateFormatValidation(date);
     let valid = true;
+    theDom.dateError.innerHTML = "";
 
     if(!validDate){
         theDom.dateError.innerHTML = "The date needs to be of the format dd/mm/yyyy";
@@ -55,12 +57,9 @@ export const conversionDateValidation = (date) => {
     }
     
     if(!dateHistoryValidation(validDate)){
-        theDom.dateError.innerHTML = "The date cannot be older than a year or in the future";
+        theDom.dateError.innerHTML += "The date cannot be older than a year or in the future";
         valid = false;
     }
-
-    if(valid)
-        theDom.dateError.innerHTML = "";
 
     return valid;
 }
@@ -69,6 +68,7 @@ export const conversionDateValidation = (date) => {
 export const historyDateValidation = (date, endDate) => {
     let validDate = dateFormatValidation(date);
     let validDateTwo = dateFormatValidation(endDate);
+    theDom.dateError.innerHTML = "";
 
     let valid = true;
 
@@ -86,9 +86,6 @@ export const historyDateValidation = (date, endDate) => {
         theDom.dateError.innerHTML += " The date range can't be more than 8 days apart";
         valid = false;
     }
-
-    if(valid)
-        theDom.dateError.innerHTML = "";
 
     return valid;
 }
