@@ -6,17 +6,25 @@ import { populateSingleConversionHTML, populateDoubleConversionHTML } from "./do
     written in this file
 */
 
-const hash = require('object-hash');
-const DB_VERSION = 1;
-const DB_NAME = "currency_converter";
-export const request = indexedDB.open(DB_NAME, DB_VERSION);
+/*
+    Ensure we're testing every major browser
+    i.e Chrome, Mozilla, Safari, IE
+*/
+window._indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 
 /*
     Check if indexDB is supported, if not
     exit from the script/ give the user a useful message
 */
-if (!window.indexedDB)
+if (!window._indexedDB)
     window.alert("Your browser doesn't support a stable version of IndexedDB. The site will therefore not be available offline :(");
+
+
+const hash = require('object-hash');
+const DB_VERSION = 1;
+const DB_NAME = "currency_converter";
+export const request = _indexedDB.open(DB_NAME, DB_VERSION);
+
 
 /*
     Generic error handler for all errors targeted at this database's
