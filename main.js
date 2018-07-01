@@ -3,11 +3,15 @@ import { makeSingleConversion, makeDoubleConversion, getHistoricalData } from ".
 import { request, indexDBSetup } from "./js/indexdb";
 import * as theDom from "./js/dom-elements";
 
-// show the single converter first always
-theDom.singleContainer.style.display = "block";
-theDom.dateEndContainer.style.display = "none";
-theDom.singleMenu.classList.toggle("selected");
-theDom.dateStart.valueAsDate = new Date();
+window.onload = () => {
+
+    // show the single converter first always
+    theDom.singleContainer.style.display = "block";
+    theDom.dateEndContainer.style.display = "none";
+    theDom.singleMenu.classList.toggle("selected");
+    theDom.dateStart.valueAsDate = new Date();
+
+}
 
 /*
     menu manupulation to create a SPA feel
