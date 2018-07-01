@@ -14,6 +14,7 @@ const SW_VERSION = "v1";
           '/index.html',
           '/build/main.bundle.js',
           '/static/images/coin.jpg',
+          '/static/images/img-loading.gif',
           '/static/js/Chart.bundle.min',
         ]);
       }).catch((error) => {

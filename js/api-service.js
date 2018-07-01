@@ -12,6 +12,11 @@ const axios = require('axios');
 const baseUrl = 'https://free.currencyconverterapi.com/api/v5/';
 
 export const getCountries = () => {
+
+    theDom.singleGif.style.display = "inline-block";
+    theDom.doubleGif.style.display = "inline-block";
+    theDom.historyGif.style.display = "inline-block";
+
     axios.get(`${baseUrl}countries`)
     .then((response) => {
         populateDropdown(generateCurrencyDropDownHTMLOutput(response.data.results));
@@ -28,6 +33,7 @@ export const getCountries = () => {
 export const makeSingleConversion = (converison_one) => {
 
     let initalCurrency = theDom.singleCurrencyFromInput.value;
+    theDom.singleGif.style.display = "inline-block";
 
     axios.get(`${baseUrl}convert?q=${converison_one}&compact=ultra&date=${theDom.dateStart.value}`)
     .then((response) => {
@@ -46,6 +52,7 @@ export const makeDoubleConversion = (converison_one, conversion_two) => {
         converison_two_url = `,${conversion_two}`
 
     let initialCurrency = theDom.doubleCurrencyFromInput.value;
+    theDom.doubleGif.style.display = "inline-block";
 
     axios.get(`${baseUrl}convert?q=${converison_one}${conversion_two ? converison_two_url : "" }&compact=ultra&date=${theDom.dateStart.value}`)
     .then((response) => {
@@ -82,13 +89,18 @@ export const getHistoricalData = (converison_one, converison_two) => {
     if (converison_two)
         converison_two_url = `,${converison_two}`
 
+    theDom.historyGif.style.display = "inline-block";
+    
     axios.get(`${baseUrl}convert?q=${converison_one}${converison_two ? converison_two_url : "" }&compact=ultra&date=${theDom.dateStart.value}&endDate=${theDom.dateEnd.value}`)
     .then((response) => {
         let graphHelperReturn = graphHelper(response.data, converison_one, converison_two);
+        theDom.historyGif.style.display = "none";
         plotGraphOne(graphHelperReturn[0], graphHelperReturn[1], graphHelperReturn[3]);
         plotGraphTwo(graphHelperReturn[0], graphHelperReturn[2], graphHelperReturn[4]);
+        
     })
     .catch((error) => {
         alert("Im sorry, something went wrong. If you're offline, this feature does not work offline yet. Stay tuned.")
+        theDom.historyGif.style.display = "none";
     });
 }

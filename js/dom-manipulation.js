@@ -11,6 +11,10 @@ export const populateDropdown = (htmlOutput) => {
     theDom.historyCurrencyFromTwo.innerHTML = htmlOutput;
     theDom.historyCurrencyToOne.innerHTML = htmlOutput;
     theDom.historyCurrencyToTwo.innerHTML = htmlOutput;
+
+    theDom.singleGif.style.display = "none";
+    theDom.doubleGif.style.display = "none";
+    theDom.historyGif.style.display = "none";
 }
 
 export const generateCurrencyDropDownHTMLOutput = (currency) => {
@@ -30,7 +34,8 @@ export const generateCurrencyDropDownHTMLOutputFromArray = (currency) => {
 export const populateSingleConversionHTML = (data, initalCurrency, converison_one) => {
     let exRate = data[converison_one][theDom.dateStart.value];
     theDom.singleExchangeRate.value = exRate;
-    theDom.singleConverisonOneResult.innerHTML = initalCurrency*exRate;
+    theDom.singleConverisonOneResult.value = initalCurrency*exRate;
+    theDom.singleGif.style.display = "none";
 }
 
 export const populateDoubleConversionHTML = (data, initalCurrency, converison_one, converison_two) => {
@@ -41,9 +46,10 @@ export const populateDoubleConversionHTML = (data, initalCurrency, converison_on
     let exRateOne = data[converison_one][theDom.dateStart.value];
     let exRateTwo = data[converison_two][theDom.dateStart.value];
 
-    theDom.doubleConverisonOneResult.innerHTML = initalCurrency*exRateOne;
-    theDom.doubleConverisonTwoResult.innerHTML = initalCurrency*exRateTwo;
+    theDom.doubleConverisonOneResult.value = initalCurrency*exRateOne;
+    theDom.doubleConverisonTwoResult.value = initalCurrency*exRateTwo;
 
     theDom.doubleExchangeRateOne.value = exRateOne;
     theDom.doubleExchangeRateTwo.value = exRateTwo;
+    theDom.doubleGif.style.display = "none";
 }
