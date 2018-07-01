@@ -1,10 +1,27 @@
 import { getCountries } from "./api-service";
 import { populateSingleConversionHTML, populateDoubleConversionHTML } from "./dom-manipulation";
+import iziToast from "izitoast";
+import * as theDom from "./dom-elements";
 
 /*
     All the interactions that concern the indexDB come from and are
     written in this file
 */
+let showError = (message) => {
+    iziToast.error({
+        title: 'Error',
+        message: message,
+        timeout: 10000,
+    });
+}
+
+let showWarning = (message) => {
+    iziToast.warning({
+        title: 'FYI',
+        message: message,
+        timeout: 10000,
+    });
+}
 
 /*
     Ensure we're testing every major browser
@@ -17,7 +34,7 @@ window._indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitInde
     exit from the script/ give the user a useful message
 */
 if (!window._indexedDB)
-    window.alert("Your browser doesn't support a stable version of IndexedDB. The site will therefore not be available offline :(");
+    showError("Your browser doesn't support a stable version of IndexedDB. The site will therefore not be available offline :(");
 
 
 const hash = require('object-hash');
@@ -31,7 +48,7 @@ export const request = _indexedDB.open(DB_NAME, DB_VERSION);
     requests!
 */
 request.onerror = (event) => {
-    alert("Database error: " + event.target.errorCode);
+    showError(`Database error: ${event.target.errorCode}`);
 };
 
 /*
@@ -151,9 +168,13 @@ export const getConversions_indexdb = (request, conversion, initialCurrency) => 
         .get(conversion);
 
     theRateObject.onsuccess = () => {
-        if(!theRateObject.result)
-            alert("We don't have this conversion offline. Apologies")
+        if(!theRateObject.result){
+            showError("We don't have this conversion offline. Apologies");
+            return ;
+        }
         
+        showWarning("This conversion has been done offline, it may not be up-to-date.");
+        showWarning("Ensure you are connected to a network for the latest exgange rates!");
         let object = {}
         object[conversion] = theRateObject.result;
         populateSingleConversionHTML(object, initialCurrency, conversion);
@@ -180,7 +201,7 @@ export const getDoubleConversions_indexdb = (request, conversion, conversion_two
 
     theRateObjectOne.onsuccess = () => {
         if(!theRateObjectOne.result){
-            alert("We don't have conversions offline. Apologies")
+            showError("We don't have this conversion offline. Apologies");
             return ;
         }
 
@@ -189,7 +210,7 @@ export const getDoubleConversions_indexdb = (request, conversion, conversion_two
 
     theRateObjectTwo.onsuccess = () => {
         if(!theRateObjectTwo.result){
-            alert("We don't have conversions offline. Apologies")
+            showError("We don't have this conversion offline. Apologies");
             return ;
         }
 
@@ -206,12 +227,17 @@ export const getDoubleConversions_indexdb = (request, conversion, conversion_two
         count++;
 
         if(conversions[conversion] && conversions[conversion_two]){
+
+            showWarning("This conversion has been done offline, it may not be up-to-date.");
+            showWarning("Ensure you are connected to a network for the latest exgange rates!");
+
             populateDoubleConversionHTML(conversions ,initialCurrency, conversion, conversion_two);
             clearInterval(conversionInterval);
         }
 
         if(count == 3){
-            alert("One or both of your conversions don't appear to be offline");
+            showError("One or both of your conversions don't appear to be offline");
+            theDom.doubleGif.style.display = "none";
             clearInterval(conversionInterval);
         }
         

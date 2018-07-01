@@ -32,6 +32,8 @@ export const generateCurrencyDropDownHTMLOutputFromArray = (currency) => {
 }
 
 export const populateSingleConversionHTML = (data, initalCurrency, converison_one) => {
+
+    theDom.singleGif.style.display = "none";
     initalCurrency = Math.abs(initalCurrency);
 
     // do not get conversations by the key using the date in case the value is
@@ -40,11 +42,11 @@ export const populateSingleConversionHTML = (data, initalCurrency, converison_on
     
     theDom.singleExchangeRate.value = exRate;
     theDom.singleConverisonOneResult.value = initalCurrency*exRate;
-    theDom.singleGif.style.display = "none";
 }
 
 export const populateDoubleConversionHTML = (data, initalCurrency, converison_one, converison_two) => {
 
+    theDom.doubleGif.style.display = "none";
     initalCurrency = Math.abs(initalCurrency);
     
     // do not get conversations by the key using the date in case the value is
@@ -57,5 +59,4 @@ export const populateDoubleConversionHTML = (data, initalCurrency, converison_on
 
     theDom.doubleExchangeRateOne.value = exRateOne;
     theDom.doubleExchangeRateTwo.value = exRateTwo;
-    theDom.doubleGif.style.display = "none";
 }
