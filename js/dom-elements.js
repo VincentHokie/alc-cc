@@ -40,3 +40,5 @@ export const doubleExchangeRateTwo = document.getElementById("double_exchange_ra
 export const singleGif = document.getElementById("single_gif");
 export const doubleGif = document.getElementById("double_gif");
 export const historyGif = document.getElementById("history_gif");
+
+export const dateError = document.getElementById("date_error");
