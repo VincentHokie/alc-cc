@@ -1,5 +1,5 @@
 button {
-  display: inline-block;
+  display: block;
   padding: 10px 40px;
   border: 0.1em solid #0077FF;
   margin: 10px 0;
@@ -10,7 +10,10 @@ button {
   font-weight: 300;
   color: #000;
   text-align: center;
-  transition: all 0.2s; }
+  transition: all 0.2s;
+  float: left;
+  clear: both;
+  background-color: #fff; }
 
 button:hover {
   color: #fff;
@@ -92,19 +95,26 @@ select.history {
   display: inline; }
 
 select.from {
-  display: block; }
+  display: block;
+  margin: 10px 0; }
+
+select.select_to {
+  margin-bottom: 10px; }
 
 p.menu_items {
   display: inline-block;
-  vertical-align: middle;
-  padding: 0 10px;
-  cursor: pointer; }
-
-p#vertilizer {
+  margin: 0;
   display: inline-block;
-  vertical-align: middle;
   height: 100%;
-  color: white; }
+  padding: 25px 10px;
+  cursor: pointer;
+  width: 160px;
+  text-align: center; }
+
+p.menu_items:hover, p.menu_items.selected {
+  background: rgba(0, 119, 255, 0.3);
+  color: #fff;
+  font-weight: 500; }
 
 p.notice {
   color: red; }
@@ -112,11 +122,12 @@ p.notice {
 p.vs {
   display: inline; }
 
-p.conversion_result {
-  width: 200px;
-  background-color: grey;
-  border-radius: 5px;
-  height: 20px; }
+p.hist_p {
+  margin: 0; }
+
+p.to {
+  margin: 15px 0 0 0;
+  color: #9098A9; }
 
 html, body {
   height: 100%; }
@@ -133,7 +144,7 @@ body {
 
 .something_container {
   display: none;
-  width: 70%;
+  width: 100%;
   margin: auto; }
 
 #app {
@@ -147,8 +158,49 @@ header {
 
 .chartjs-render-monitor {
   display: block;
-  height: 534px;
-  width: 1068px; }
+  width: 100% !important;
+  height: auto !important; }
+
+#center-body {
+  float: left;
+  width: 100%;
+  padding: 15px 10px; }
+
+.dateContainer {
+  display: inline-block;
+  margin-bottom: 10px; }
+
+#dateContainerContainer {
+  width: 100%;
+  margin: auto;
+  background: rgba(0, 119, 255, 0.03);
+  padding: 10px; }
+
+.double_component_container {
+  background: rgba(0, 119, 255, 0.03);
+  float: left;
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px; }
+
+.single_container {
+  float: left;
+  clear: both;
+  background: rgba(0, 119, 255, 0.03);
+  margin-top: 5px;
+  padding: 10px;
+  width: 100%; }
+
+.loading-gif {
+  float: left;
+  width: 30px;
+  margin: 12px;
+  display: none; }
+
+.button-container {
+  float: left;
+  width: 100%;
+  margin-bottom: 50px; }
 
 footer {
   width: 100%;
@@ -159,5 +211,40 @@ footer img {
   height: 5px;
   width: 100%;
   float: left; }
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  #center-body {
+    padding: 30px; }
+
+  #dateContainerContainer {
+    width: 70%; }
+
+  .something_container {
+    width: 70%; } }
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  #center-body {
+    padding: 30px; }
+
+  #dateContainerContainer {
+    width: 70%; }
+
+  .something_container {
+    width: 90%; } }
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  #dateContainerContainer {
+    width: 80%; }
+
+  .something_container {
+    width: 80%; } }
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  #dateContainerContainer {
+    width: 70%; }
+
+  .something_container {
+    width: 70%; } }
 
 /*# sourceMappingURL=main.css.map */

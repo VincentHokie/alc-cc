@@ -1,16 +1,19 @@
 
 p.menu_items {
     display: inline-block;
-    vertical-align: middle;
-    padding: 0 10px;
+    margin: 0;
+    display: inline-block;
+    height: 100%;
+    padding: 25px 10px;
     cursor: pointer;
+    width: 160px;
+    text-align: center;
 }
 
-p#vertilizer{
-    display: inline-block;
-    vertical-align: middle;
-    height: 100%; 
-    color: white;
+p.menu_items:hover, p.menu_items.selected {
+    background: rgba(#0077FF,.3);
+    color: #fff;
+    font-weight: 500;
 }
 
 p.notice {
@@ -21,9 +24,11 @@ p.vs {
     display: inline;
 }
 
-p.conversion_result {
-    width:200px;
-    background-color: grey;
-    border-radius: 5px;
-    height: 20px;
+p.hist_p {
+    margin: 0;
+}
+
+p.to {
+    margin: 15px 0 0 0;
+    color: #9098A9;
 }

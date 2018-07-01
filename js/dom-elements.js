@@ -25,6 +25,7 @@ export const spaContainers = document.getElementsByClassName("something_containe
 
 export const dateStart = document.getElementById("dateStart");
 export const dateEnd = document.getElementById("dateEnd");
+export const dateEndContainer = document.getElementById("dateEndContainer");
 
 export const singleCurrencyFromInput = document.getElementById("currency_from_input");
 export const singleConverisonOneResult = document.getElementById("conversion_one_result");
@@ -35,3 +36,7 @@ export const doubleConverisonOneResult = document.getElementById("double_convers
 export const doubleConverisonTwoResult = document.getElementById("double_conversion_two_result");
 export const doubleExchangeRateOne = document.getElementById("double_exchange_rate_one");
 export const doubleExchangeRateTwo = document.getElementById("double_exchange_rate_two");
+
+export const singleGif = document.getElementById("single_gif");
+export const doubleGif = document.getElementById("double_gif");
+export const historyGif = document.getElementById("history_gif");

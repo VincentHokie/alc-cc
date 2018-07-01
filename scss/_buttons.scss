@@ -1,5 +1,5 @@
 button {
-    display:inline-block;
+    display:block;
     padding:10px 40px;;
     border:0.1em solid #0077FF;
     margin:10px 0;
@@ -11,6 +11,9 @@ button {
     color:#000;
     text-align:center;
     transition: all 0.2s;
+    float: left;
+    clear: both;
+    background-color: #fff;
 }
 
 button:hover {
