@@ -7,6 +7,8 @@ import {
     populateDoubleConversionHTML } from "./dom-manipulation";
 import { plotGraphOne, plotGraphTwo } from "./chartjs-plot";
 import * as theDom from "./dom-elements";
+import { conversionDateValidation, historyDateValidation } from "./validation";
+
 
 const axios = require('axios');
 const baseUrl = 'https://free.currencyconverterapi.com/api/v5/';
@@ -32,6 +34,10 @@ export const getCountries = () => {
 
 export const makeSingleConversion = (converison_one) => {
 
+    // perform input field validation
+    if(!conversionDateValidation(theDom.dateStart.value))
+        return ;
+
     let initalCurrency = theDom.singleCurrencyFromInput.value;
     theDom.singleGif.style.display = "inline-block";
 
@@ -46,6 +52,10 @@ export const makeSingleConversion = (converison_one) => {
 }
 
 export const makeDoubleConversion = (converison_one, conversion_two) => {
+
+    // perform input field validation
+    if(!conversionDateValidation(theDom.dateStart.value))
+        return ;
 
     let converison_two_url;
     if (conversion_two)
@@ -85,6 +95,10 @@ let graphHelper = (data, converison_one, converison_two) => {
 
 export const getHistoricalData = (converison_one, converison_two) => {
 
+    // perform input field validation
+    if(!historyDateValidation(theDom.dateStart.value, theDom.dateEnd.value))
+        return ;
+    
     let converison_two_url;
     if (converison_two)
         converison_two_url = `,${converison_two}`

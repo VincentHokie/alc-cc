@@ -32,7 +32,12 @@ export const generateCurrencyDropDownHTMLOutputFromArray = (currency) => {
 }
 
 export const populateSingleConversionHTML = (data, initalCurrency, converison_one) => {
-    let exRate = data[converison_one][theDom.dateStart.value];
+    initalCurrency = Math.abs(initalCurrency);
+
+    // do not get conversations by the key using the date in case the value is
+    // coming from the db and is older than today
+    let [date, exRate] = Object.entries(data[converison_one])[0];
+    
     theDom.singleExchangeRate.value = exRate;
     theDom.singleConverisonOneResult.value = initalCurrency*exRate;
     theDom.singleGif.style.display = "none";
@@ -40,11 +45,12 @@ export const populateSingleConversionHTML = (data, initalCurrency, converison_on
 
 export const populateDoubleConversionHTML = (data, initalCurrency, converison_one, converison_two) => {
 
-    //ensure we dont always try to get todays conversion rate, this may throw an error
-    // if the conversion rate is from yesterday or before
+    initalCurrency = Math.abs(initalCurrency);
     
-    let exRateOne = data[converison_one][theDom.dateStart.value];
-    let exRateTwo = data[converison_two][theDom.dateStart.value];
+    // do not get conversations by the key using the date in case the value is
+    // coming from the db and is older than today
+    let [dateOne, exRateOne] = Object.entries(data[converison_one])[0];
+    let [dateTwo, exRateTwo] = Object.entries(data[converison_two])[0];
 
     theDom.doubleConverisonOneResult.value = initalCurrency*exRateOne;
     theDom.doubleConverisonTwoResult.value = initalCurrency*exRateTwo;
